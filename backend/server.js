@@ -12,9 +12,8 @@ require("./config/DB");
 app.use(express.json());
 
 //Import all routes
-const products = require("./routes/productRoutes");
+app.use('/api/v1/product',require("./routes/productRoutes"));
 
-app.use('/api/v1',products);
 
 //Middleware for handler error
 app.use(errorMiddleware);
