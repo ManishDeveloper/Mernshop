@@ -13,7 +13,7 @@ app.use(express.json());
 
 //Import all routes
 app.use('/api/v1/product',require("./routes/productRoutes"));
-
+app.use('/api/v1/user', require("./routes/productRoutes"));
 
 //Middleware for handler error
 app.use(errorMiddleware);
