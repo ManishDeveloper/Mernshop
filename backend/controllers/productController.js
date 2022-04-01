@@ -1,10 +1,12 @@
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorHandler");
+const asyncHandler = require("express-async-handler");
 
 //@route    POST /api/v1/product/new
 //@desc     Add New Product
 //@access   Private
-exports.newProduct = async (req, res, next) => {
+exports.newProduct = asyncHandler(
+    async (req, res, next) => {
     
     const product = await Product.create(req.body);
 
@@ -12,13 +14,13 @@ exports.newProduct = async (req, res, next) => {
         success:true,
         product
     });
-}
+}); 
 
 
 //@route    GET /api/v1/products
 //@desc     Get All Products
 //@access   Private
-exports.getProducts = async (req, res, next) => {
+exports.getProducts = asyncHandler(async (req, res, next) => {
     
     const products = await Product.find();
 
@@ -27,13 +29,13 @@ exports.getProducts = async (req, res, next) => {
         count:products.length,
         products
     });
-}
+}); 
 
 
 //@route    GET /api/v1/product/:id
 //@desc     Get Single Product
 //@access   Private
-exports.getSingleProduct = async (req, res, next) => {
+exports.getSingleProduct = asyncHandler(async (req, res, next) => {
 
     const product = await Product.findById(req.params.id);
 
@@ -45,14 +47,14 @@ exports.getSingleProduct = async (req, res, next) => {
         success:true,
         product
     });
-}
+}); 
 
 
 
 //@route    PUT /api/v1/product/:id
 //@desc     Update Product
 //@access   Private
-exports.updateProducts = async (req, res, next) => {
+exports.updateProducts = asyncHandler(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
 
     if(!product){
@@ -69,13 +71,13 @@ exports.updateProducts = async (req, res, next) => {
         updateProduct
     });    
 
-}
+}); 
 
 
 //@route    DELETE /api/v1/product/:id
 //@desc     Delete Product
 //@access   Private
-exports.deleteProduct = async (req, res, next) => {
+exports.deleteProduct = asyncHandler(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
 
     if(!product){
@@ -92,4 +94,4 @@ exports.deleteProduct = async (req, res, next) => {
         message:'Delete Product'
     });
 
-}
+});
